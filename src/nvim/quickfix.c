@@ -726,6 +726,7 @@ static int qf_parse_line(qf_info_T *qi, char_u *linebuf, size_t linelen,
   // Always ignore case when looking for a matching error.
   regmatch.rm_ic = true;
 
+restofline:
   // If there was no %> item start at the first pattern
   if (fmt_start == NULL) {
     fmt_ptr = fmt_first;
@@ -737,7 +738,6 @@ static int qf_parse_line(qf_info_T *qi, char_u *linebuf, size_t linelen,
   // Try to match each part of 'errorformat' until we find a complete
   // match or no match.
   fields->valid = true;
-restofline:
   for (; fmt_ptr != NULL; fmt_ptr = fmt_ptr->next) {
     idx = fmt_ptr->prefix;
     if (qi->qf_multiscan && vim_strchr((char_u *)"OPQ", idx) == NULL) {
